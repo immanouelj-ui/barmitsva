@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { MapPin, Clock, Music, Utensils, BookOpen } from "lucide-react";
 import { formatDate, type Invitation } from "@/lib/models";
+import { CelebrationInvitation } from "./celebration-invitation";
 import { RsvpForm } from "./rsvp-form";
 export function InvitationCard({
   invitation: i,
@@ -11,6 +12,8 @@ export function InvitationCard({
   preview?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  if (i.theme === "celebration")
+    return <CelebrationInvitation invitation={i} preview={preview} />;
   const title = i.event_type === "mariage" ? "MARIAGE" : "BAR MITZVAH";
   const map = (address: string) =>
     "https://www.google.com/maps/search/?api=1&query=" +

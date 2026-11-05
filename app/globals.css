@@ -1250,3 +1250,45 @@ td {
 .confirmation-help .button {
   font-size: 10px;
 }
+.theme-celebration {
+  --theme: #0b2a5b;
+  --accent: #c9a227;
+  --paper: #fbf9f3;
+  color: white;
+  background:
+    radial-gradient(60% 40% at 25% 20%, #2b78c6, transparent 70%),
+    radial-gradient(60% 40% at 80% 60%, #1c5ea8, transparent 70%),
+    radial-gradient(70% 50% at 20% 90%, #3b8ad4, transparent 70%), #0a3678;
+}
+.model-preview.theme-celebration {
+  position: relative;
+  overflow: hidden;
+}
+.model-preview.theme-celebration:before,
+.model-preview.theme-celebration:after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 80%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #f1d36e,
+    #b8901f,
+    transparent
+  );
+  box-shadow: 0 0 10px #e6c15a99;
+  rotate: -28deg;
+  pointer-events: none;
+}
+.model-preview.theme-celebration:before {
+  top: 22px;
+  left: -20px;
+}
+.model-preview.theme-celebration:after {
+  bottom: 25px;
+  right: -20px;
+}
+.classic-invitation .card > .star {
+  margin: 0 auto;
+}

@@ -1,11 +1,24 @@
 import { z } from "zod";
+import { templates } from "./models";
+const imageUrl = z
+  .union([
+    z
+      .url()
+      .max(2000)
+      .refine(
+        (value) => value.startsWith("https://"),
+        "Utilisez une URL d’image HTTPS.",
+      ),
+    z.literal(""),
+  ])
+  .optional();
 const short = z.string().trim().max(160);
 const date = z.iso.date();
 const time = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/);
 export const invitationSchema = z
   .object({
     event_type: z.enum(["mariage", "bar-mitsva"]),
-    theme: z.enum(["azure", "olivier", "rose", "minuit"]),
+    theme: z.enum(templates.map((t) => t.id)),
     title: short.min(2),
     hosts: short,
     event_date: date,
@@ -17,6 +30,11 @@ export const invitationSchema = z
     reception_time: z.union([time, z.literal("")]),
     deadline: z.union([date, z.literal("")]),
     message: z.string().trim().max(2000),
+    photo_url: imageUrl,
+    reception_photo_url: imageUrl,
+    kiddouch_time: z.union([time, z.literal("")]).optional(),
+    entertainment_time: z.union([time, z.literal("")]).optional(),
+    dress_code: short.optional(),
     published: z.boolean(),
   })
   .refine((v) => !v.deadline || v.deadline <= v.event_date, {

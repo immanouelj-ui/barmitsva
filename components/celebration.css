@@ -1,0 +1,746 @@
+@font-face {
+  font-family: CelebrationDisplay;
+  src: url("/fonts/playfair.ttf");
+  font-display: swap;
+}
+.classic-invitation {
+  --navy: #0b2a5b;
+  --ink: #15386e;
+  --blue: #0c3f82;
+  --gold: #c9a227;
+  --cream: #f7f3ea;
+  --paper: #fbf9f3;
+  --line: #d8d2c0;
+  --serif: "Playfair Display", Georgia, serif;
+  --script: "Great Vibes", "Brush Script MT", cursive;
+  --sans: "Montserrat", Arial, sans-serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.classic-invitation {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+.classic-invitation * {
+  box-sizing: border-box;
+  margin: 0;
+}
+.classic-invitation {
+  background: var(--navy);
+  color: var(--ink);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+.classic-invitation.lock {
+  overflow: hidden;
+  height: 100vh;
+}
+.classic-invitation svg {
+  display: block;
+}
+.classic-invitation .star {
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.4;
+}
+.classic-invitation .classic-main {
+  display: none;
+  padding: 20px 14px 40px;
+}
+.classic-invitation .card {
+  position: relative;
+  max-width: 440px;
+  margin: 0 auto 22px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: radial-gradient(120% 80% at 50% 0, #fffdf8, var(--cream));
+  text-align: center;
+  padding: 150px 28px 150px;
+}
+.classic-invitation .wc {
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  height: 140px;
+  pointer-events: none;
+}
+.classic-invitation .wc.t {
+  top: -20px;
+  background:
+    radial-gradient(55% 90% at 15% 0, #1a5cae, transparent 72%),
+    radial-gradient(50% 80% at 85% 0, #082e6c, transparent 72%),
+    radial-gradient(45% 55% at 55% 5%, #8cc0ee, transparent 75%);
+  -webkit-mask-image: linear-gradient(#000 35%, transparent);
+  mask-image: linear-gradient(#000 35%, transparent);
+}
+.classic-invitation .wc.b {
+  bottom: -20px;
+  background:
+    radial-gradient(55% 90% at 85% 100%, #0a3170, transparent 72%),
+    radial-gradient(50% 80% at 15% 100%, #3f87d0, transparent 72%),
+    radial-gradient(45% 55% at 50% 95%, #7fb4e8, transparent 75%);
+  -webkit-mask-image: linear-gradient(transparent, #000 65%);
+  mask-image: linear-gradient(transparent, #000 65%);
+}
+.classic-invitation .gl {
+  position: absolute;
+  left: 8%;
+  width: 55%;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #f1d36e,
+    #b8901f,
+    transparent
+  );
+  box-shadow: 0 0 10px #e6c15a99;
+  transform: rotate(-5deg);
+  pointer-events: none;
+}
+.classic-invitation .gl.t {
+  top: 34px;
+  left: 40%;
+}
+.classic-invitation .gl.b {
+  bottom: 48px;
+}
+.classic-invitation .card > *:not(.wc):not(.gl) {
+  position: relative;
+}
+.classic-invitation h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 21px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.classic-invitation .sep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px auto;
+  max-width: 300px;
+}
+.classic-invitation .sep i {
+  flex: 1;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.7;
+}
+.classic-invitation .sep svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.5;
+}
+.classic-invitation .small {
+  font-family: var(--serif);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 1.9;
+}
+.classic-invitation .name {
+  font-family: var(--script);
+  font-size: 68px;
+  line-height: 1;
+  color: var(--ink);
+  margin: 6px 0;
+}
+.classic-invitation .photo-arch {
+  width: 100%;
+  aspect-ratio: 1.38;
+  border-radius: 200px 200px 6px 6px;
+  border: 2px solid #d4c58a;
+  background: #7fa4d6 center/cover;
+  margin: 0 auto 34px;
+}
+.classic-invitation .when {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  margin: 6px 0 22px;
+}
+.classic-invitation .when .d {
+  padding-right: 22px;
+  border-right: 1px solid var(--ink);
+}
+.classic-invitation .when b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 500;
+}
+.classic-invitation .when .h {
+  font-family: var(--serif);
+  letter-spacing: 0.14em;
+  font-size: 19px;
+}
+.classic-invitation .loc {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: center;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+.classic-invitation .loc svg {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.5;
+}
+/* timeline */
+.classic-invitation .tl {
+  position: relative;
+  max-width: 300px;
+  margin: 38px auto 0;
+  text-align: left;
+}
+.classic-invitation .tl .ln {
+  position: absolute;
+  left: 4px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: var(--ink);
+  transform-origin: top;
+}
+.classic-invitation .ev {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 84px;
+  padding-left: 34px;
+}
+.classic-invitation .ev:before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+}
+.classic-invitation .ev svg {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.classic-invitation .ev b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+.classic-invitation .ev span {
+  font-size: 13px;
+}
+/* reception */
+.classic-invitation .photo-t {
+  width: calc(100% + 56px);
+  margin: -110px -28px 70px;
+  aspect-ratio: 1.5;
+  background: #aaa center/cover;
+  clip-path: polygon(
+    0 4%,
+    8% 1%,
+    18% 5%,
+    30% 2%,
+    44% 5%,
+    58% 1%,
+    72% 4%,
+    86% 1%,
+    100% 4%,
+    99% 90%,
+    88% 95%,
+    74% 91%,
+    60% 97%,
+    44% 92%,
+    30% 97%,
+    15% 92%,
+    0 96%
+  );
+}
+.classic-invitation .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--blue);
+  color: #fff;
+  text-decoration: none;
+  border: 0;
+  border-radius: 40px;
+  padding: 15px 28px;
+  font: 600 13px var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 18px #0c3f8240;
+}
+.classic-invitation .btn:focus-visible,
+.classic-invitation input:focus-visible,
+.classic-invitation select:focus-visible,
+.classic-invitation textarea:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+.classic-invitation .btn svg {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+}
+.classic-invitation .dress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  margin: 14px 0;
+}
+.classic-invitation .dress i {
+  width: 1px;
+  height: 46px;
+  background: var(--gold);
+}
+.classic-invitation .dress svg {
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+/* form */
+.classic-invitation .fld {
+  display: block;
+  width: 100%;
+  background: #fdfcf8;
+  border: 1px solid #d3d9e6;
+  border-radius: 10px;
+  padding: 13px 14px;
+  font: 400 14px var(--sans);
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.classic-invitation textarea.fld {
+  height: 84px;
+  resize: vertical;
+}
+.classic-invitation .rad {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  margin: 0 0 12px 2px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.classic-invitation .rad input {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: transparent;
+  margin: 0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.classic-invitation .rad input:checked {
+  background: radial-gradient(var(--ink) 45%, transparent 50%);
+}
+.classic-invitation .err {
+  color: #a3261c;
+  font-size: 13px;
+  min-height: 18px;
+  margin-bottom: 8px;
+}
+.classic-invitation .btn.full {
+  width: 100%;
+  justify-content: center;
+}
+.classic-invitation .thanks {
+  display: none;
+  padding: 30px 0;
+}
+.classic-invitation .cursive {
+  font-family: var(--script);
+  font-size: 30px;
+  line-height: 1.25;
+  color: var(--blue);
+  margin-top: 18px;
+}
+/* cover */
+.classic-invitation .classic-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 40% at 25% 20%, #2b78c6, transparent 70%),
+    radial-gradient(60% 40% at 80% 60%, #1c5ea8, transparent 70%),
+    radial-gradient(70% 50% at 20% 90%, #3b8ad4, transparent 70%), #0a3678;
+}
+.classic-invitation .classic-cover .gl {
+  height: 7px;
+  width: 70%;
+}
+.classic-invitation .classic-cover .gl.t {
+  top: 11%;
+  left: -6%;
+  transform: rotate(-32deg);
+}
+.classic-invitation .classic-cover .gl.b {
+  bottom: 14%;
+  left: 44%;
+  transform: rotate(-24deg);
+}
+.classic-invitation .cv {
+  position: relative;
+  padding: 20px;
+}
+.classic-invitation .arc {
+  font-family: var(--serif);
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.classic-invitation .cv .star {
+  stroke: #fff;
+  margin: 14px auto;
+}
+.classic-invitation .cv .t1 {
+  font-family: var(--serif);
+  letter-spacing: 0.14em;
+  font-size: 24px;
+}
+.classic-invitation .cv .de {
+  font-family: var(--serif);
+  font-size: 11px;
+  margin: 4px 0;
+}
+.classic-invitation .cv .name {
+  color: #fff;
+  font-size: 92px;
+  line-height: 0.9;
+}
+.classic-invitation .cv .rule {
+  width: 96px;
+  height: 1px;
+  background: #9cc7f0;
+  margin: 24px auto 16px;
+}
+.classic-invitation .cv .dt {
+  font-family: var(--serif);
+  letter-spacing: 0.12em;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.classic-invitation .open {
+  margin-top: 28px;
+  background: transparent;
+  border: 1px solid #fffc;
+  box-shadow: none;
+}
+.classic-invitation .dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f1d36e;
+  box-shadow: 0 0 8px #f1d36e;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .classic-invitation .dot {
+    display: none;
+  }
+}
+/* React integration: all selectors stay inside this invitation. */
+.classic-invitation {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  color-scheme: light;
+  --serif: Editorial, Georgia, serif;
+  --script: Calligraphy, cursive;
+  --sans: Sans, Arial, sans-serif;
+}
+.classic-invitation.lock {
+  overflow: hidden;
+  height: auto;
+  min-height: 100svh;
+}
+.classic-invitation .classic-cover {
+  position: relative;
+  inset: auto;
+  min-height: 100svh;
+  padding: 25px 12px;
+}
+.classic-invitation.opening .classic-cover {
+  position: absolute;
+  inset: 0 0 auto;
+  animation: classic-cover-out 1s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.classic-invitation .classic-main {
+  display: block;
+}
+.classic-invitation .classic-main[hidden] {
+  display: none;
+}
+.classic-invitation .preview-banner {
+  color: #f6edda;
+  position: relative;
+  z-index: 30;
+  margin: 0;
+}
+.classic-invitation .cv .name {
+  overflow-wrap: anywhere;
+  max-width: 410px;
+  font-weight: 400;
+}
+.classic-invitation .card .name {
+  overflow-wrap: anywhere;
+}
+.classic-invitation .photo-arch {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.classic-invitation .photo-arch img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+.classic-invitation .photo-t {
+  display: grid;
+  place-items: center;
+  margin: 0 -28px 60px;
+}
+.classic-invitation .photo-t img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.classic-invitation .photo-placeholder {
+  background: linear-gradient(135deg, #83b3dc, #16477d);
+  color: #efe2b7;
+  font: 15px var(--serif);
+}
+.classic-invitation .classic-message {
+  white-space: pre-wrap;
+}
+.classic-invitation .classic-hosts {
+  font-size: 11px;
+  margin-top: 12px;
+}
+.classic-invitation .rsvp-form input[type="text"],
+.classic-invitation .rsvp-form textarea,
+.classic-invitation .rsvp-form select {
+  background: #fdfcf8;
+  color: var(--ink);
+}
+.classic-invitation .rsvp-form fieldset {
+  text-align: left;
+}
+.classic-invitation .rsvp-form .button {
+  background: var(--blue);
+  color: white;
+  border: 0;
+  border-radius: 40px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.classic-invitation .rsvp-form label {
+  text-align: left;
+}
+.classic-invitation .rsvp-form .radio {
+  color: var(--ink);
+  font-size: 12px;
+}
+.classic-invitation .rsvp-form small {
+  text-align: left;
+  font-size: 9px;
+}
+.classic-invitation .rsvp-form .form-status {
+  color: var(--ink);
+}
+.classic-invitation .classic-cover .cv > * {
+  animation: classic-entry 0.9s both;
+}
+.classic-invitation .classic-cover .cv > *:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.classic-invitation .classic-cover .cv > *:nth-child(3) {
+  animation-delay: 0.25s;
+}
+.classic-invitation .classic-cover .cv > *:nth-child(4) {
+  animation-delay: 0.35s;
+}
+.classic-invitation .classic-cover .cv > *:nth-child(5) {
+  animation-delay: 0.45s;
+}
+.classic-invitation .classic-cover .cv > *:nth-child(6) {
+  animation-delay: 0.55s;
+}
+.classic-invitation .classic-cover .cv > *:nth-child(7) {
+  animation-delay: 0.65s;
+}
+.classic-invitation .classic-cover .cv > *:nth-child(8) {
+  animation-delay: 0.75s;
+}
+.classic-invitation .classic-cover .gl {
+  animation: classic-gold 4s ease-in-out infinite alternate;
+}
+.classic-invitation .dot {
+  left: var(--x);
+  top: var(--y);
+  animation: classic-sparkle var(--duration) ease-in-out var(--delay) infinite
+    alternate;
+}
+.classic-invitation .observed .card > *:not(.wc):not(.gl):not(.photo-t) {
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+.classic-invitation
+  .observed
+  .card:not([data-visible])
+  > *:not(.wc):not(.gl):not(.photo-t) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.classic-invitation .observed .card[data-visible] .ev {
+  animation: classic-entry 0.8s both;
+}
+.classic-invitation .observed .card[data-visible] .ev:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.classic-invitation .observed .card[data-visible] .ev:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.classic-invitation .observed .card[data-visible] .ev:nth-child(5) {
+  animation-delay: 0.45s;
+}
+.classic-invitation .observed .card[data-visible] .ln {
+  animation: classic-line 1.4s ease both;
+}
+@keyframes classic-entry {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes classic-cover-out {
+  to {
+    transform: translateY(-105%);
+    opacity: 0;
+  }
+}
+@keyframes classic-sparkle {
+  from {
+    opacity: 0.1;
+    transform: translateY(0) scale(0.4);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(-45px) scale(1);
+  }
+}
+@keyframes classic-gold {
+  to {
+    translate: 18px 0;
+    opacity: 0.65;
+  }
+}
+@keyframes classic-line {
+  from {
+    scale: 1 0;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+@media (max-width: 480px) {
+  .classic-invitation .cv .name {
+    font-size: clamp(60px, 20vw, 92px);
+  }
+  .classic-invitation .cv {
+    max-width: 100%;
+  }
+  .classic-invitation .card {
+    padding-left: 26px;
+    padding-right: 26px;
+  }
+  .classic-invitation .name {
+    font-size: clamp(45px, 15vw, 68px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .classic-invitation * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .classic-invitation .observed .card:not([data-visible]) > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+.classic-invitation .rsvp-form label {
+  margin-bottom: 12px;
+}
+.classic-invitation .rsvp-form input,
+.classic-invitation .rsvp-form textarea,
+.classic-invitation .rsvp-form select {
+  margin-top: 7px;
+}
+.classic-invitation .rsvp-form input[type="radio"] {
+  margin: 0;
+}
+.classic-invitation .rsvp-form legend {
+  margin-bottom: 12px;
+}
+.classic-invitation .rsvp-form .form-status {
+  margin: 12px 0;
+}
+
+.classic-invitation {
+  --serif: CelebrationDisplay, Georgia, serif;
+}

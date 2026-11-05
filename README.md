@@ -4,7 +4,7 @@ Application Next.js / TypeScript de faire-part numériques pour mariages et bar-
 
 ## Fonctionnalités incluses
 
-- Catalogue de quatre modèles et aperçu interactif : Éclat d’azur, Sous l’olivier, Promesse, Minuit doré.
+- Catalogue de cinq modèles et aperçu interactif : Éclat d’azur, Sous l’olivier, Promesse, Minuit doré, Célébration bleue (adapté du fichier HTML fourni).
 - Inscription et connexion des organisateurs par email et mot de passe (Supabase Auth).
 - Création, modification, publication, passage en brouillon et suppression d’invitations.
 - Personnalisation du modèle, prénoms, parents, texte, date, cérémonie, réception et date limite de réponse.
@@ -30,7 +30,7 @@ Le catalogue et les aperçus fonctionnent sans Supabase. La connexion, les invit
 ## Connecter Supabase
 
 1. Créer un projet Supabase.
-2. Ouvrir **SQL Editor**, copier et exécuter **tout** le fichier `supabase/migrations/001_initial.sql` une seule fois. Variante CLI : lier le projet puis `supabase db push`.
+2. Ouvrir **SQL Editor**, copier et exécuter **tout** le fichier `supabase/migrations/001_initial.sql` une seule fois, puis `supabase/migrations/002_celebration_model.sql`. Pour une base déjà installée, exécuter uniquement `002_celebration_model.sql`. Variante CLI : lier le projet puis `supabase db push`.
 3. Dans **Connect** ou **Settings → API**, récupérer l’URL du projet et sa clé **publishable** (`sb_publishable_…`, ou l’ancienne clé `anon`). Ne jamais utiliser une clé secrète / `service_role` dans une variable `NEXT_PUBLIC_*`.
 4. Dans `.env.local` (puis dans Vercel), renseigner :
 
@@ -97,3 +97,11 @@ Le message « Demande d’inscription reçue » signifie qu’aucune session n�
 5. Vérifier la **Site URL**, les **Redirect URLs** et le modèle d’email, puis redéployer Vercel si les variables d’environnement changent.
 
 Documentation officielle : https://supabase.com/docs/guides/auth/auth-smtp et https://supabase.com/docs/guides/auth/testing-auth-flows
+
+## Modèle Célébration bleue
+
+Adaptation React du fichier HTML fourni : couverture bleue animée et particules dorées, photo en arche, programme, réception avec découpe décorative et confirmations connectées au dashboard. Les animations respectent le réglage « Réduire les animations ».
+
+Après la migration `002_celebration_model.sql`, choisir **Célébration bleue** dans le catalogue ou dans l’éditeur. Les champs supplémentaires permettent de préciser les horaires du Kiddouch et des animations, la tenue souhaitée et deux URLs de photos HTTPS. Utiliser des liens directs vers des images publiquement consultables, par exemple depuis votre stockage Supabase. L’envoi de fichiers depuis le formulaire n’est pas inclus.
+
+Les photos du fichier d’origine ne sont pas ajoutées au catalogue. L’aperçu utilise des emplacements neutres ; chaque organisateur renseigne ses propres photos dans son invitation. Les réponses utilisent le même formulaire et les mêmes règles de sécurité que les autres modèles.

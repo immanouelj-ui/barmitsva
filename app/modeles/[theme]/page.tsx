@@ -14,6 +14,15 @@ export default async function Model({
     ...demo,
     theme: t.id,
     event_type: t.kind,
+    ...(t.id === "celebration"
+      ? {
+          kiddouch_time: "12:30",
+          entertainment_time: "16:00",
+          dress_code: "Élégante et festive",
+          address: "12 rue de la Célébration, 75017 Paris",
+          reception_address: "45 boulevard de la Fête, 75017 Paris",
+        }
+      : {}),
     title: t.kind === "mariage" ? "Sarah & Nathan" : demo.title,
   };
   return (

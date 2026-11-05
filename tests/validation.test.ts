@@ -63,3 +63,39 @@ test("CSV escapes quotes, delimiters and formula injection", () => {
   assert.equal(csvCell(" @evil"), `"' @evil"`);
   assert.equal(csvCell("Bonjour"), '"Bonjour"');
 });
+
+test("celebration photos require HTTPS and new schedule times are validated", () => {
+  const value = {
+    event_type: "bar-mitsva",
+    theme: "celebration",
+    title: "David Michael",
+    hosts: "Les parents",
+    event_date: "2027-09-19",
+    event_time: "10:00",
+    venue: "Synagogue",
+    address: "Paris",
+    reception_venue: "Le Jardin",
+    reception_address: "Paris",
+    reception_time: "14:00",
+    deadline: "",
+    message: "Bienvenue",
+    published: false,
+    photo_url: "https://example.com/photo.jpg",
+    reception_photo_url: "",
+    kiddouch_time: "12:30",
+    entertainment_time: "16:00",
+    dress_code: "Élégante et festive",
+  };
+  assert.ok(invitationSchema.safeParse(value).success);
+  for (const patch of [
+    { photo_url: "javascript:alert(1)" },
+    { photo_url: "not a url" },
+    { photo_url: "http://example.com/photo.jpg" },
+    { kiddouch_time: "29:00" },
+    { entertainment_time: "16h" },
+  ])
+    assert.equal(
+      invitationSchema.safeParse({ ...value, ...patch }).success,
+      false,
+    );
+});

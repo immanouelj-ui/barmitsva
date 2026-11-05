@@ -24,6 +24,34 @@ test("database enforces owner isolation, published links, RSVP validation and de
       `insert into public.invitations(id,owner_id,slug,event_type,theme,title,event_date,event_time,venue) values($1,$2,$3,'bar-mitsva','azure','David','2099-09-19','10:00','Synagogue')`,
       [id, owner, slug],
     );
+    const upgrade = await readFile(
+      new URL(
+        "../supabase/migrations/002_celebration_model.sql",
+        import.meta.url,
+      ),
+      "utf8",
+    );
+    await db.exec(upgrade);
+    await db.exec(upgrade); // Existing projects can safely rerun this upgrade.
+    assert.equal(
+      (await db.query("select * from public.invitations")).rows.length,
+      1,
+    );
+    await db.query(
+      "update public.invitations set theme='celebration',photo_url='https://example.com/photo.jpg',kiddouch_time='12:30' where id=$1",
+      [id],
+    );
+    await assert.rejects(
+      db.query("update public.invitations set theme='unknown' where id=$1", [
+        id,
+      ]),
+    );
+    await assert.rejects(
+      db.query(
+        "update public.invitations set photo_url='javascript:alert(1)' where id=$1",
+        [id],
+      ),
+    );
     await db.exec("set role anon");
     assert.equal(
       (
@@ -56,6 +84,9 @@ test("database enforces owner isolation, published links, RSVP validation and de
     ).rows[0].data;
     assert.equal(pub.title, "David");
     assert.equal(pub.owner_id, undefined);
+    assert.equal(pub.theme, "celebration");
+    assert.equal(pub.photo_url, "https://example.com/photo.jpg");
+    assert.equal(pub.kiddouch_time, "12:30");
     await db.query("select public.submit_rsvp($1,$2,$3,true,2,$4)", [
       slug,
       token,

@@ -1,5 +1,13 @@
 export const templates = [
   {
+    id: "celebration",
+    name: "Célébration bleue",
+    kind: "bar-mitsva",
+    description:
+      "Le modèle animé de votre fichier : photos en arche, dorures et programme.",
+    label: "Photos · Bleu & Or",
+  },
+  {
     id: "azure",
     name: "Éclat d’azur",
     kind: "bar-mitsva",
@@ -46,6 +54,11 @@ export type Invitation = {
   reception_time: string;
   deadline: string | null;
   message: string;
+  photo_url?: string;
+  reception_photo_url?: string;
+  kiddouch_time?: string;
+  entertainment_time?: string;
+  dress_code?: string;
   published: boolean;
   created_at?: string;
 };

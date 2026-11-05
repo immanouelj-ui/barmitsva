@@ -12,6 +12,7 @@ export function Editor({
   const [status, setStatus] = useState(""),
     [busy, setBusy] = useState(false);
   const i = invitation;
+  const [selectedTheme, setSelectedTheme] = useState(i?.theme || theme);
   const fields = [
     ["title", "Prénom(s) à afficher", "Sarah & Nathan"],
     ["hosts", "Parents / organisateurs", "Familles…"],
@@ -22,6 +23,19 @@ export function Editor({
     ["reception_venue", "Lieu de réception (facultatif)", ""],
     ["reception_address", "Adresse de réception", ""],
     ["reception_time", "Heure de réception", ""],
+    ["kiddouch_time", "Heure du Kiddouch (facultatif)", ""],
+    ["entertainment_time", "Heure des animations (facultatif)", ""],
+    [
+      "photo_url",
+      "Photo de la cérémonie — URL HTTPS (facultatif)",
+      "https://…",
+    ],
+    [
+      "reception_photo_url",
+      "Photo de la réception — URL HTTPS (facultatif)",
+      "https://…",
+    ],
+    ["dress_code", "Tenue souhaitée (facultatif)", "Élégante et festive"],
     ["deadline", "Réponse souhaitée avant le (facultatif)", ""],
   ];
   return (
@@ -55,7 +69,11 @@ export function Editor({
         </label>
         <label>
           Modèle
-          <select name="theme" defaultValue={i?.theme || theme}>
+          <select
+            name="theme"
+            value={selectedTheme}
+            onChange={(e) => setSelectedTheme(e.target.value)}
+          >
             {templates.map((t) => (
               <option key={t.id} value={t.id}>
                 {t.name}
@@ -63,27 +81,50 @@ export function Editor({
             ))}
           </select>
         </label>
-        {fields.map(([key, label, placeholder]) => (
-          <label key={key}>
-            {label}
-            <input
-              name={key}
-              defaultValue={String(i?.[key as keyof Invitation] || "")}
-              type={
-                key.includes("date") || key === "deadline"
-                  ? "date"
-                  : key.includes("time")
-                    ? "time"
-                    : "text"
-              }
-              placeholder={placeholder}
-              maxLength={key.includes("address") ? 350 : 160}
-              required={["title", "event_date", "event_time", "venue"].includes(
-                key,
-              )}
-            />
-          </label>
-        ))}
+        {fields
+          .filter(
+            ([key]) =>
+              selectedTheme === "celebration" ||
+              ![
+                "photo_url",
+                "reception_photo_url",
+                "kiddouch_time",
+                "entertainment_time",
+                "dress_code",
+              ].includes(key),
+          )
+          .map(([key, label, placeholder]) => (
+            <label key={key}>
+              {label}
+              <input
+                name={key}
+                defaultValue={String(i?.[key as keyof Invitation] || "")}
+                type={
+                  key.endsWith("_url")
+                    ? "url"
+                    : key.includes("date") || key === "deadline"
+                      ? "date"
+                      : key.includes("time")
+                        ? "time"
+                        : "text"
+                }
+                placeholder={placeholder}
+                maxLength={
+                  key.endsWith("_url")
+                    ? 2000
+                    : key.includes("address")
+                      ? 350
+                      : 160
+                }
+                required={[
+                  "title",
+                  "event_date",
+                  "event_time",
+                  "venue",
+                ].includes(key)}
+              />
+            </label>
+          ))}
       </div>
       <label>
         Votre texte d’invitation
