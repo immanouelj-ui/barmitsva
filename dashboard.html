@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tableau de bord – Bar Mitzvah de David Michael</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Jost:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0e8dc;--card:#faf8f5;--bd:#e6dccb;--tx:#2b3035;--mu:#6b6f75;--bl:#6f93bd;--ro:#c49a8a;--be:#e6dccb;--dk:#2b3035;--dkt:#fff;--serif:'Playfair Display',Georgia,serif;--sans:'Jost',Arial,sans-serif;--script:'Great Vibes','Brush Script MT',cursive;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#14181d;--card:#1d2229;--bd:#2c333c;--tx:#ece8e1;--mu:#9aa1ab;--be:#343b45;--dk:#ece8e1;--dkt:#14181d}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#14181d;--card:#1d2229;--bd:#2c333c;--tx:#ece8e1;--mu:#9aa1ab;--be:#343b45;--dk:#ece8e1;--dkt:#14181d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px;padding:12px 12px 40px}
+.w{max-width:1070px;margin:0 auto}
+.hero{position:relative;text-align:center;padding:36px 20px 32px;border-radius:26px 26px 60px 60px;overflow:hidden;box-shadow:0 18px 40px #3b2f2220;background:radial-gradient(60% 90% at 20% 30%,#fff,transparent 70%),radial-gradient(70% 80% at 75% 60%,#b9cde4,transparent 70%),linear-gradient(120deg,#dce7f3,#f4f0ea 60%,#e8dfd6);color:#2b3035}
+.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,#fff3 0 18px,#8aa8c933 18px 40px);filter:blur(22px);opacity:.7}
+.hero>*{position:relative}
+.mono{width:64px;height:64px;border-radius:50%;border:1px solid #9bb5d4;margin:0 auto 16px;display:grid;place-items:center;font:400 28px var(--script);background:#fff6}
+.eye{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#555}
+.title{font:400 62px/1.1 var(--script);margin:4px 0 8px}
+.sub{font:italic 400 17px var(--serif);color:#4a4f55}
+.acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.b{display:inline-flex;align-items:center;gap:8px;border:1px solid #a9bfd9;background:#fff;color:#2b3035;border-radius:30px;padding:11px 20px;font:500 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+.b.p{background:var(--bl);border-color:var(--bl);color:#fff}
+.b svg{width:14px;height:14px}
+svg.i{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:3px solid var(--bl);outline-offset:2px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:22px}
+.c h3{font:500 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--mu);margin-bottom:12px}
+.big{font:400 48px/1 var(--serif)}
+.big small{font:400 20px var(--sans);color:var(--mu);margin-left:6px}
+.c p{color:var(--mu);margin-top:10px;line-height:1.5}
+.bar{display:flex;height:8px;border-radius:8px;overflow:hidden;background:var(--be);margin:14px 0 12px}
+.bar i{display:block;height:100%}
+.lg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--mu)}
+.lg span:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;background:var(--k)}
+.note{text-align:center;font:italic 400 17px var(--serif);color:var(--mu);padding:16px;border-radius:18px;margin-bottom:16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+h2{font:400 26px var(--serif);letter-spacing:.14em;text-transform:uppercase}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.in{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:30px;padding:12px 18px;font:400 14px var(--sans);min-width:200px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 14px}
+.chip{border:1px solid var(--bd);background:transparent;color:var(--tx);border-radius:30px;padding:8px 16px;font:400 13px var(--sans);cursor:pointer}
+.chip.on{background:var(--dk);color:var(--dkt);border-color:var(--dk)}
+.chip em{font-style:normal;opacity:.7;margin-left:4px}
+.row{display:grid;grid-template-columns:1fr 150px 130px 130px 130px;align-items:center;gap:10px;padding:14px 10px;border-top:1px solid var(--bd)}
+.row.h{border-top:0;border-bottom:1px solid var(--bd);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);padding-bottom:12px}
+.nm{font:400 19px var(--serif)}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:5px 12px;font-size:12px;background:var(--be)}
+.pill:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.oui{background:#6f93bd26;color:var(--bl)}.pill.non{background:#c49a8a2e;color:#b0806f}.pill.att{color:var(--mu)}
+.n{font:400 21px var(--serif)}
+.n small{display:block;font:400 12px var(--sans);color:var(--mu)}
+.ac{display:flex;gap:8px;justify-content:flex-end}
+.ic{width:38px;height:38px;border-radius:50%;border:1px solid var(--bd);background:var(--card);color:var(--tx);display:grid;place-items:center;cursor:pointer;text-decoration:none}
+.ic svg{width:16px;height:16px}
+.empty{text-align:center;color:var(--mu);padding:30px;font:italic 17px var(--serif)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--dk);color:var(--dkt);padding:12px 22px;border-radius:30px;opacity:0;pointer-events:none;z-index:9}
+.ov{position:fixed;inset:0;background:#0009;display:none;place-items:center;padding:16px;z-index:8}
+.ov .c{width:min(560px,100%)}
+.ov textarea{width:100%;height:220px;margin:14px 0;background:var(--bg);color:var(--tx);border:1px solid var(--bd);border-radius:12px;padding:12px;font:13px/1.5 monospace}
+@media(max-width:900px){.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.title{font-size:48px}.stats{grid-template-columns:1fr}.row.h{display:none}.row{grid-template-columns:1fr 1fr;row-gap:10px}.row .ac{grid-column:1/-1;justify-content:flex-start}.in{min-width:0;flex:1}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="rf" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.5-5.8M20 4v5h-5"/></symbol>
+<symbol id="ey" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="dl" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+<symbol id="lk" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+<symbol id="ch" viewBox="0 0 24 24"><path d="M4 20l1.5-4.5A8 8 0 1 1 8.5 18.5L4 20Z"/></symbol>
+</defs></svg>
+<div class="w">
+  <header class="hero" id="hero">
+    <div class="mono">DM</div>
+    <p class="eye">Tableau de bord</p>
+    <h1 class="title">David Michael</h1>
+    <p class="sub">Bar Mitzvah · dimanche 19 septembre 2027, Synagogue Beth El, Paris</p>
+    <div class="acts">
+      <button class="b" id="rf"><svg class="i"><use href="#rf"/></svg>Actualiser</button>
+      <a class="b" target="_blank" rel="noopener" href="index.html"><svg class="i"><use href="#ey"/></svg>Voir l’invitation</a>
+      <button class="b p" id="ex"><svg class="i"><use href="#dl"/></svg>Exporter en CSV</button>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="c"><h3>Réponses reçues</h3><div class="big"><span id="s1">0</span><small>/ <span id="s1t"></span></small></div>
+      <div class="bar"><i id="b1" style="background:var(--bl)"></i><i id="b2" style="background:var(--ro)"></i></div>
+      <div class="lg"><span style="--k:var(--bl)" id="l1"></span><span style="--k:var(--ro)" id="l2"></span><span style="--k:var(--be)" id="l3"></span></div></div>
+    <div class="c"><h3>Convives confirmés</h3><div class="big" id="s2">0</div><p id="s2t"></p></div>
+    <div class="c"><h3>Sans réponse</h3><div class="big" id="s3">0</div><p>Filtrez-les plus bas pour les relancer</p></div>
+    <div class="c"><h3>Jamais ouvert</h3><div class="big" id="s4">0</div><p id="s4t"></p></div>
+  </section>
+  <div class="c note" id="dl2"></div>
+
+  <section class="c" style="padding:24px">
+    <div class="top"><h2>Invités</h2>
+      <div class="tools"><input class="in" id="q" placeholder="Rechercher un nom" aria-label="Rechercher">
+        <select class="in" id="so" aria-label="Trier"><option value="n">Trier par nom</option><option value="r">Trier par réponse</option><option value="c">Trier par convives</option><option value="o">Trier par ouvertures</option></select></div></div>
+    <div class="chips" id="chips"></div>
+    <div class="row h"><span>Invité</span><span>Réponse</span><span>Convives</span><span>Ouvertures</span><span></span></div>
+    <div id="list"></div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="ov" id="ov"><div class="c"><h2 style="font-size:20px">Export CSV</h2><textarea id="csv" readonly aria-label="Contenu CSV"></textarea><div class="acts" style="margin:0;justify-content:flex-end"><button class="b" id="cl">Fermer</button><button class="b p" id="cp">Copier</button></div></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+const LINK=new URL('index.html',location.href).href;
+const G=[
+ {n:'Famille Attal',s:'non',a:0,e:0,o:1},{n:'Famille Azoulay',s:'oui',a:2,e:0,o:1},
+ {n:'Famille Benchetrit',s:'att',a:0,e:0,o:0},{n:'Famille Bensoussan',s:'oui',a:1,e:1,o:1},
+ {n:'Famille Cohen',s:'oui',a:2,e:2,o:1},{n:'Famille Dahan',s:'att',a:0,e:0,o:0},
+ {n:'Famille Lévy',s:'oui',a:2,e:1,o:1},{n:'Famille Sitbon',s:'att',a:0,e:0,o:0}];
+const LBL={oui:'Présent',non:'Empêché',att:'Sans réponse'};
+const $=id=>document.getElementById(id);
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let flt='all';
+const cnt=(el,to)=>{if(still){el.textContent=to;return}const o={v:0};gsap.to(o,{v:to,duration:1.3,ease:'power2.out',onUpdate:()=>el.textContent=Math.round(o.v)})};
+const sum=(f)=>G.reduce((t,g)=>t+f(g),0);
+const st=()=>({p:G.filter(g=>g.s==='oui').length,x:G.filter(g=>g.s==='non').length,w:G.filter(g=>g.s==='att').length,a:sum(g=>g.a),e:sum(g=>g.e),z:G.filter(g=>!g.o).length,o:sum(g=>g.o)});
+
+function stats(){
+  const s=st(),T=G.length;
+  $('s1t').textContent=T;$('l1').textContent=s.p+' présents';$('l2').textContent=s.x+' empêché';$('l3').textContent=s.w+' en attente';
+  $('s2t').textContent=s.a+' adultes et '+s.e+' enfants';$('s4t').textContent=s.o+' ouvertures au total';
+  const d=Math.ceil((new Date('2027-08-01T00:00:00')-Date.now())/864e5);
+  $('dl2').textContent='Réponses attendues avant le 1er août 2027, dans '+d+' jours.';
+  cnt($('s1'),s.p+s.x);cnt($('s2'),s.a+s.e);cnt($('s3'),s.w);cnt($('s4'),s.z);
+  const w1=s.p/T*100,w2=s.x/T*100;
+  if(still){$('b1').style.width=w1+'%';$('b2').style.width=w2+'%'}
+  else gsap.fromTo('#b1,#b2',{width:0},{width:(i)=>[w1,w2][i]+'%',duration:1.4,ease:'power3.out',stagger:.15});
+}
+function chips(){
+  const s=st(),C=[['all','Tous',G.length],['oui','Présents',s.p],['non','Empêchés',s.x],['att','Sans réponse',s.w],['nov','Jamais ouvert',s.z]];
+  $('chips').innerHTML=C.map(c=>`<button class="chip${flt===c[0]?' on':''}" data-f="${c[0]}">${c[1]}<em>${c[2]}</em></button>`).join('');
+}
+function list(anim=true){
+  const q=$('q').value.trim().toLowerCase(),so=$('so').value;
+  let L=G.filter(g=>g.n.toLowerCase().includes(q)&&(flt==='all'||(flt==='nov'?!g.o:g.s===flt)));
+  const ord={oui:0,non:1,att:2};
+  L.sort((x,y)=>so==='r'?ord[x.s]-ord[y.s]:so==='c'?(y.a+y.e)-(x.a+x.e):so==='o'?y.o-x.o:x.n.localeCompare(y.n,'fr'));
+  $('list').innerHTML=L.length?L.map(g=>`<div class="row"><span class="nm">${g.n}</span><span><span class="pill ${g.s}">${LBL[g.s]}</span></span>
+   <span class="n">${g.a+g.e}${g.s==='oui'?`<small>${g.a} ad. · ${g.e} enf.</small>`:''}</span>
+   <span class="n">${g.o}<small>${g.o?'ouvert':'jamais ouvert'}</small></span>
+   <span class="ac"><button class="ic" data-a="cp" data-n="${g.n}" aria-label="Copier le lien"><svg class="i"><use href="#lk"/></svg></button>
+   <a class="ic" href="index.html" target="_blank" rel="noopener" aria-label="Voir l’invitation"><svg class="i"><use href="#ey"/></svg></a>
+   <button class="ic" data-a="wa" data-n="${g.n}" aria-label="Envoyer sur WhatsApp"><svg class="i"><use href="#ch"/></svg></button></span></div>`).join(''):'<p class="empty">Aucun invité ne correspond.</p>';
+  if(anim&&!still)gsap.from('#list .row',{y:18,opacity:0,duration:.5,stagger:.06,ease:'power2.out'});
+}
+function toast(t){const e=$('toast');e.textContent=t;if(still){e.style.opacity=1;setTimeout(()=>e.style.opacity=0,2200);return}
+  gsap.timeline().to(e,{opacity:1,y:-6,duration:.3}).to(e,{opacity:0,y:0,duration:.4},'+=1.8')}
+async function copy(t){try{await navigator.clipboard.writeText(t);return true}catch(e){return false}}
+
+$('chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;flt=b.dataset.f;chips();list()});
+$('q').addEventListener('input',()=>list(false));$('so').addEventListener('change',()=>list());
+$('list').addEventListener('click',async e=>{
+  const b=e.target.closest('button[data-a]');if(!b)return;
+  if(b.dataset.a==='cp')toast(await copy(LINK)?'Lien copié':LINK);
+  else window.open('https://wa.me/?text='+encodeURIComponent('Bonjour '+b.dataset.n+', retrouvez notre invitation pour la Bar Mitzvah de David Michael : '+LINK),'_blank','noopener');
+});
+$('rf').addEventListener('click',()=>{stats();list();if(!still)gsap.fromTo('#rf',{rotation:0},{rotation:360,duration:.7,ease:'power2.inOut'})});
+$('ex').addEventListener('click',()=>{
+  $('csv').value='Invité;Réponse;Adultes;Enfants;Ouvertures\n'+G.map(g=>[g.n,LBL[g.s],g.a,g.e,g.o].join(';')).join('\n');
+  $('ov').style.display='grid';if(!still)gsap.from('#ov .c',{y:30,opacity:0,duration:.4,ease:'power3.out'});
+});
+$('cl').addEventListener('click',()=>$('ov').style.display='none');
+$('cp').addEventListener('click',async()=>{const t=$('csv');t.select();toast(await copy(t.value)?'CSV copié':'Sélectionné : faites Ctrl+C')});
+
+chips();stats();list(false);
+if(!still){
+  gsap.from('#hero',{y:-30,opacity:0,duration:1,ease:'power3.out'});
+  gsap.from('#hero > *',{y:20,opacity:0,duration:.9,stagger:.12,delay:.2,ease:'power3.out'});
+  gsap.from('.stats .c,.note',{y:30,opacity:0,duration:.8,stagger:.12,delay:.5,ease:'power3.out'});
+  gsap.from('.chip',{scale:.8,opacity:0,duration:.5,stagger:.06,delay:.9,ease:'back.out(2)'});
+  gsap.from('#list .row',{y:18,opacity:0,duration:.5,stagger:.07,delay:1,ease:'power2.out'});
+}
+</script>
+</body>
+</html>
