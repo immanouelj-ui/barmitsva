@@ -40,7 +40,7 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=VOTRE_CLE_PUBLIQUE
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-5. Dans **Authentication → URL Configuration**, définir **Site URL** sur l’URL Vercel finale et ajouter `http://localhost:3000` pour le développement. Le flux fourni utilise la confirmation email standard Supabase puis une connexion par mot de passe ; aucun callback OAuth n’est nécessaire.
+5. Dans **Authentication → URL Configuration**, définir **Site URL** sur l’URL Vercel finale et ajouter `http://localhost:3000` pour le développement. Ajouter également `https://VOTRE-DOMAINE/auth/callback` et `http://localhost:3000/auth/callback` aux **Redirect URLs**. Le flux utilise la confirmation email Supabase standard (`{{ .ConfirmationURL }}` dans le modèle d’email) puis un échange PKCE via `/auth/callback`. Ouvrir le lien depuis le navigateur utilisé pour l’inscription.
 6. Conserver la confirmation email activée. Configurer un SMTP de production dans Supabase avant d’ouvrir les inscriptions à des clients (les envois email intégrés sont limités).
 7. Créer un compte dans `/connexion`, confirmer l’email, puis se connecter.
 
@@ -85,3 +85,15 @@ Il s’agit d’une première version fonctionnelle. Pas de paiement, d’édite
 Le formulaire public possède des protections de base (validation, piège à robots, limite SQL : 50 réponses modifiées par minute et 5 000 réponses par événement, délai de 10 secondes entre modifications du même jeton). Une protection anti-bot / rate limiting à l’entrée doit être ajoutée avant une ouverture commerciale importante. Toute personne possédant le lien peut répondre et les réponses ne sont pas une vérification d’identité.
 
 Les organisateurs peuvent supprimer une invitation et toutes ses réponses depuis leur espace. Prévoir vos mentions légales, politique de confidentialité, règles de conservation des données et assistance client avant une commercialisation.
+
+## Dépanner la création de compte
+
+Le message « Demande d’inscription reçue » signifie qu’aucune session n’est ouverte tant que l’email n’est pas confirmé. Il ne garantit pas la livraison : Supabase masque aussi volontairement certains cas d’adresses déjà inscrites.
+
+1. Vérifier les indésirables et, si le compte a déjà été confirmé, essayer **Se connecter**.
+2. Le bouton **Renvoyer l’email de confirmation** apparaît après une inscription ou une connexion refusée pour email non confirmé. Un délai de 60 secondes évite les renvois immédiats.
+3. Dans Supabase **Authentication → Users**, vérifier si l’utilisateur existe et si son email est confirmé. Consulter **Authentication → Logs** pour les erreurs d’envoi.
+4. Le service email intégré Supabase est réservé aux tests : il n’envoie qu’aux adresses des membres de l’organisation, avec une limite de 2 emails par heure. Pour les inscriptions clients, configurer un fournisseur SMTP dans les paramètres d’email Supabase. La migration SQL n’installe pas de serveur d’envoi d’emails.
+5. Vérifier la **Site URL**, les **Redirect URLs** et le modèle d’email, puis redéployer Vercel si les variables d’environnement changent.
+
+Documentation officielle : https://supabase.com/docs/guides/auth/auth-smtp et https://supabase.com/docs/guides/auth/testing-auth-flows

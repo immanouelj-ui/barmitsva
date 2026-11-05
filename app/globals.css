@@ -1232,3 +1232,21 @@ td {
     transition: none !important;
   }
 }
+
+.confirmation-help {
+  margin: 20px 0 25px;
+  padding: 20px;
+  border: 1px solid #dfd8c6;
+  border-radius: 7px;
+  background: #f4f1e7;
+}
+.confirmation-help h2 {
+  font-size: 27px;
+}
+.confirmation-help p {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.confirmation-help .button {
+  font-size: 10px;
+}

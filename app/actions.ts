@@ -1,45 +1,115 @@
 "use server";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+import { authErrorMessage, type AuthState } from "@/lib/auth-messages";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { supabase } from "@/lib/supabase/server";
 import { configured } from "@/lib/config";
 import { invitationSchema } from "@/lib/validation";
-export async function authAction(form: FormData) {
+export async function authAction(
+  _previous: AuthState,
+  form: FormData,
+): Promise<AuthState> {
   if (!configured) return { error: "Supabase n’est pas configuré." };
-  const data = z
+  const parsed = z
     .object({
-      email: z.email(),
+      email: z.string().trim().pipe(z.email()),
       password: z.string().min(8).max(128),
       mode: z.enum(["signup", "login"]),
     })
     .safeParse(Object.fromEntries(form));
-  if (!data.success)
+  if (!parsed.success)
     return {
       error:
         "Vérifiez votre email et votre mot de passe (8 caractères minimum).",
     };
-  const db = await supabase();
-  const { email, password, mode } = data.data;
-  if (mode === "signup") {
-    const { data, error } = await db.auth.signUp({ email, password });
-    if (error)
-      return {
-        error: "Inscription impossible. Réessayez ou utilisez un autre email.",
-      };
-    if (!data.session)
-      return {
-        message:
-          "Vérifiez votre boîte email et confirmez votre compte, puis connectez-vous.",
-      };
-  } else {
-    const { error } = await db.auth.signInWithPassword({ email, password });
-    if (error)
-      return {
-        error: "Email ou mot de passe incorrect, ou compte non confirmé.",
-      };
+  const { email, password, mode } = parsed.data;
+  try {
+    const db = await supabase();
+    if (mode === "signup") {
+      const origin = await authOrigin();
+      const { data, error } = await db.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: origin + "/auth/callback" },
+      });
+      if (error)
+        return {
+          error: authErrorMessage(error),
+          email,
+          needsConfirmation: error.code === "user_already_exists",
+        };
+      if (!data.session)
+        return {
+          email,
+          needsConfirmation: true,
+          cooldownUntil: Date.now() + 60_000,
+          message:
+            "Demande d’inscription reçue. Si cette adresse peut être inscrite, un email de confirmation vous a été envoyé. Ouvrez son lien pour activer le compte. Si vous aviez déjà confirmé votre compte, connectez-vous directement.",
+        };
+    } else {
+      const { error } = await db.auth.signInWithPassword({ email, password });
+      if (error)
+        return {
+          error: authErrorMessage(error),
+          email,
+          needsConfirmation: error.code === "email_not_confirmed",
+        };
+    }
+  } catch {
+    return {
+      error:
+        "Impossible de joindre Supabase. Vérifiez votre connexion et réessayez. Si le problème persiste, vérifiez l’URL Supabase dans Vercel.",
+    };
   }
+  // Keep redirects outside the catch: Next.js implements navigation by throwing.
   redirect("/dashboard");
+}
+
+async function authOrigin() {
+  const requestHeaders = await headers();
+  // Next.js validates the Origin of Server Actions before they execute.
+  const origin =
+    requestHeaders.get("origin") || process.env.NEXT_PUBLIC_SITE_URL;
+  if (!origin) throw new Error("Missing application origin");
+  const url = new URL(origin);
+  if (!["http:", "https:"].includes(url.protocol))
+    throw new Error("Invalid application origin");
+  return url.origin;
+}
+
+export async function resendConfirmation(
+  _previous: AuthState,
+  form: FormData,
+): Promise<AuthState> {
+  if (!configured) return { error: "Supabase n’est pas configuré." };
+  const email = z.string().trim().pipe(z.email()).safeParse(form.get("email"));
+  if (!email.success) return { error: "Indiquez une adresse email valide." };
+  try {
+    const db = await supabase();
+    const origin = await authOrigin();
+    const { error } = await db.auth.resend({
+      type: "signup",
+      email: email.data,
+      options: { emailRedirectTo: origin + "/auth/callback" },
+    });
+    if (error)
+      return {
+        error: authErrorMessage(error),
+        cooldownUntil: error.status === 429 ? Date.now() + 60_000 : undefined,
+      };
+    return {
+      message:
+        "Si une inscription attend confirmation pour cette adresse, un nouvel email a été demandé. Vérifiez les indésirables et attendez quelques minutes.",
+      cooldownUntil: Date.now() + 60_000,
+    };
+  } catch {
+    return {
+      error:
+        "Impossible de demander un nouvel email. Vérifiez votre connexion puis réessayez.",
+    };
+  }
 }
 export async function logout() {
   const db = await supabase();

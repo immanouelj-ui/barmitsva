@@ -1,7 +1,12 @@
 import { Header } from "@/components/header";
 import { AuthForm } from "@/components/auth-form";
 import { configured } from "@/lib/config";
-export default function Login() {
+export default async function Login({
+  searchParams,
+}: {
+  searchParams: Promise<{ confirmation?: string }>;
+}) {
+  const { confirmation } = await searchParams;
   return (
     <>
       <Header />
@@ -13,6 +18,14 @@ export default function Login() {
           <i>vous retrouver.</i>
         </h1>
         <p>Vos invitations et toutes les réponses, au même endroit.</p>
+        {confirmation === "failed" && (
+          <p className="notice" role="alert">
+            Ce lien est expiré, déjà utilisé ou a été ouvert dans un autre
+            navigateur. Essayez de vous connecter si votre email est déjà
+            confirmé ; sinon demandez un nouvel email après une tentative de
+            connexion.
+          </p>
+        )}
         {configured ? (
           <AuthForm />
         ) : (
